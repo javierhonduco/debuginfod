@@ -85,7 +85,7 @@ impl Client {
   /// HTTP errors returned by a subset of servers at the base URLs provided
   /// during construction will be ignored if and only if one of them returned
   /// data successfully.
-  pub fn fetch_debug_info(&self, build_id: &[u8]) -> Result<Option<impl Read>> {
+  pub fn fetch_debug_info(&self, build_id: &str) -> Result<Option<impl Read>> {
     fn status_to_error(status: StatusCode) -> Error {
       let reason = status
         .canonical_reason()
@@ -95,7 +95,6 @@ impl Client {
       anyhow!("request failed with HTTP status {status}{reason}")
     }
 
-    let build_id = format_build_id(build_id);
     let mut issue_err = None;
     let mut server_err = None;
 
