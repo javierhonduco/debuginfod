@@ -85,7 +85,7 @@ impl Client {
   /// HTTP errors returned by a subset of servers at the base URLs provided
   /// during construction will be ignored if and only if one of them returned
   /// data successfully.
-  pub fn fetch_debug_info(&self, build_id: &str) -> Result<Option<impl Read>> {
+  pub fn fetch_debug_info(&self, build_id: &str, suffix: &str) -> Result<Option<impl Read>> {
     fn status_to_error(status: StatusCode) -> Error {
       let reason = status
         .canonical_reason()
@@ -101,7 +101,7 @@ impl Client {
     // The endpoint we contact is `/buildid/<BUILDID>/debuginfo`.
     for base_url in &self.base_urls {
       let mut url = base_url.clone();
-      let () = url.set_path(&format!("buildid/{build_id}/debuginfo"));
+      let () = url.set_path(&format!("buildid/{build_id}/{suffix}"));
       debug!("making GET request to {url}");
 
       let result = self
