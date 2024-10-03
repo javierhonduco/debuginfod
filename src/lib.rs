@@ -3,14 +3,14 @@
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-#[cfg(feature = "fs-cache")]
-mod caching_client;
+// #[cfg(feature = "fs-cache")]
+// mod caching_client;
 mod client;
 mod util;
 
-#[cfg(feature = "fs-cache")]
-#[cfg_attr(docsrs, doc(cfg(feature = "fs-cache")))]
-pub use caching_client::CachingClient;
+// #[cfg(feature = "fs-cache")]
+// #[cfg_attr(docsrs, doc(cfg(feature = "fs-cache")))]
+// pub use caching_client::CachingClient;
 pub use client::Client;
 
 
